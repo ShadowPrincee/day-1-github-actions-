@@ -11,11 +11,11 @@ jobs:
 
     # 4. The Steps
     steps:
-      - name: Say Hello
-        run: echo "Starting my DevOps Journey!"
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      - name: Check the OS version
-        run: lscpu
+      - name: Build Docker Image
+        run: docker build -t my-devops-app:latest .
 
-      - name: List files in the repo
-        run: ls -R
+      - name: List Docker Images
+        run: docker images
