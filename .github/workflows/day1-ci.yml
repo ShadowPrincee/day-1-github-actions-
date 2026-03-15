@@ -1,25 +1,27 @@
 name: My First CI Pipeline
 
-# 1. The Trigger (Event)
 on: [push]
 
 jobs:
-  # 2. The Job
   build-and-test:
-    # 3. The Runner (GitHub-hosted Ubuntu machine)
     runs-on: ubuntu-latest
 
-    # 4. The Steps
+    env:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+
     steps:
+
       - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
+          username: ${{ env.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build and Push
-        run: |
-         docker build -t "${{ secrets.DOCKER_USERNAME }}/my-devops-app:latest" .
-         docker push "${{ secrets.DOCKER_USERNAME }}/my-devops-app:latest"
+
+      - name: Build Docker Image
+        run: docker build -t $DOCKER_USERNAME/my-devops-app:latest .
+
+      - name: Push Docker Image
+        run: docker push $DOCKER_USERNAME/my-devops-app:latest
