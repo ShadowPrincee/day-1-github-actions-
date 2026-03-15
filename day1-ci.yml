@@ -1,0 +1,21 @@
+name: My First CI Pipeline
+
+# 1. The Trigger (Event)
+on: [push]
+
+jobs:
+  # 2. The Job
+  build-and-test:
+    # 3. The Runner (GitHub-hosted Ubuntu machine)
+    runs-on: ubuntu-latest
+
+    # 4. The Steps
+    steps:
+      - name: Say Hello
+        run: echo "Starting my DevOps Journey!"
+
+      - name: Check the OS version
+        run: lscpu
+
+      - name: List files in the repo
+        run: ls -R
