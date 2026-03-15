@@ -22,5 +22,5 @@ jobs:
 
       - name: Build and Push
         run: |
-          docker build -t yourusername/my-devops-app:latest .
-          docker push yourusername/my-devops-app:latest
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/my-devops-app:latest .
+          docker push ${{ secrets.sk DOCKER_USERNAME }}/my-devops-app:latest
